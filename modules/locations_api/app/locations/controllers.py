@@ -5,7 +5,7 @@ from app.locations.schemas import (
     ConnectionSchema,
     LocationSchema,
 )
-from app.locations.services import ConnectionService, LocationService
+from app.locations.services import LocationService
 from flask import request
 from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource

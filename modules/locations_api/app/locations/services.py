@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 from typing import Dict, List
 
 from app import db
-from app.locations.models import Connection, Location, Person
-from app.locations.schemas import ConnectionSchema, LocationSchema, PersonSchema
+from app.locations.models import Connection, Location
+from app.locations.schemas import ConnectionSchema, LocationSchema
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
