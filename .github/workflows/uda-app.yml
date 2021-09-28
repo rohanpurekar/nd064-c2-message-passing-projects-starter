@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: modules/api
-          file: ./Dockerfile
+          file: modules/api/Dockerfile
           platforms: linux/amd64
           push: true
           tags: rap999a/udaconnect-app:latest
