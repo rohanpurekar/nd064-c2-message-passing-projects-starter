@@ -31,7 +31,7 @@ spec:
         service: udaconnect-app
     spec:
       containers:
-      - image: rap999a/udaconnect-app:latest
+      - image: rap99a/udaconnect-app:latest
         name: udaconnect-app
         imagePullPolicy: Always
         resources:
