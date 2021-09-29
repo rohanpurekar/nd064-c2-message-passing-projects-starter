@@ -23,5 +23,11 @@ api = Namespace("locations", description="Connections via geolocation.")  # noqa
 class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
+        TOPIC_NAME = 'location_api'
+        KAFKA_SERVER = 'my-release-kafka-0.my-release-kafka-headless.default.svc.cluster.local:9092'
+        producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
+        message=dict({'Name':'Rohan Purekar', 'status':'Alright!'})
+        producer.send(TOPIC_NAME, bytes(str(message), 'utf-8'))
+        producer.flush()
         location: Location = LocationService.retrieve(location_id)
         return location
