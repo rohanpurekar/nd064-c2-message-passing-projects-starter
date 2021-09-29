@@ -1,4 +1,4 @@
-name: Udaconnect APP - Package with Docker
+name: Uda Loc
 
 on:
   push:
