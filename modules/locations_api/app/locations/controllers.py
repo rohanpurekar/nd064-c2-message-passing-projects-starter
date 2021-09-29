@@ -1,5 +1,5 @@
 from datetime import datetime
-from app import app
+
 from app.locations.models import Connection, Location
 from app.locations.schemas import (
     ConnectionSchema,
@@ -16,18 +16,6 @@ DATE_FORMAT = "%Y-%m-%d"
 
 api = Namespace("locations", description="Connections via geolocation.")  # noqa
 
-@app.before_request
-def before_request():
-    # Set up a Kafka producer
-    TOPIC_NAME = 'location_api'
-    KAFKA_SERVER = 'my-release-kafka-0.my-release-kafka-headless.default.svc.cluster.local:9092'
-    producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
-    message=dict({'Name':'Rohan Purekar', 'status':'Alright!'})
-    producer.send('test', bytes(str(message), 'utf-8'))
-    producer.flush()
-    # Setting Kafka to g enables us to use this
-    # in other parts of our application
-    g.kafka_producer = producer
 
 @api.route("/locations")
 @api.route("/locations/<location_id>")
