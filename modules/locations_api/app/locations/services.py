@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime, timedelta
-from modules.locations_api.app import locations
 from typing import Dict, List
 
 from app import db
