@@ -1,5 +1,5 @@
 from datetime import datetime
-import app
+from app import app
 from app.locations.models import Connection, Location
 from app.locations.schemas import (
     ConnectionSchema,
