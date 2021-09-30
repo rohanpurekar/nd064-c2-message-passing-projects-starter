@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime, timedelta
-from modules.persons_api.app import persons
+
 from typing import Dict, List
 
 from app import db
