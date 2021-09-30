@@ -91,7 +91,7 @@ class PostRequestProcessingServicer(api_items_pb2_grpc.PostRequestProcessingServ
             "longitude": request.longitude,
             "latitude": request.latitude,
         }
-        
+        print(location_request)
         return api_items_pb2.LocationMessage(**location_request)
 
     def create_person(self, request, context):
@@ -114,7 +114,7 @@ class PostRequestProcessingServicer(api_items_pb2_grpc.PostRequestProcessingServ
             "company_name": request.company_name,
         }
         
-        
+        print(person_request)
         return api_items_pb2.PersonMessage(**person_request)
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
