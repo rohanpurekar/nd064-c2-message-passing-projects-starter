@@ -14,7 +14,7 @@ KAFKA_SERVER = 'my-release-kafka-0.my-release-kafka-headless.default.svc.cluster
 consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_SERVER], value_deserializer=lambda m: json.dumps(m.decode('utf-8')))
 
 
-channel = grpc.insecure_channel("grpc-server.default.svc.cluster.local:5005")
+channel = grpc.insecure_channel("udaconnect-grpc-server:5005")
 stub = api_items_pb2_grpc.PostRequestProcessingServiceStub(channel)
 
 for message in consumer:

@@ -6,10 +6,13 @@ metadata:
   name: udaconnect-grpc-server
 spec:
   ports:
-  - name: "5000"
+  - name: "5005"
     port: 5005
+    targetPort: 5005
+    nodePort: 30007
   selector:
     service: udaconnect-grpc-server
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
