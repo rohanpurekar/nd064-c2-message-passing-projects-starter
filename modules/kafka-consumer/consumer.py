@@ -29,7 +29,7 @@ for message in consumer:
         )
         stub.create_location(location)
     elif "first_name" in json_message:
-        person = api_items_pb2.LocationMessage(
+        person = api_items_pb2.PersonMessage(
             first_name=json_message["first_name"],
             last_name=json_message["last_name"],
             company_name=json_message["company_name"]

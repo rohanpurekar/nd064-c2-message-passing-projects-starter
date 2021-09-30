@@ -12,6 +12,7 @@ from sqlalchemy.sql import func
 from datetime import datetime
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
+from geoalchemy2.functions import ST_AsText, ST_Point
 from shapely.geometry.point import Point
 from sqlalchemy import BigInteger, Column, Date, DateTime, ForeignKey, Integer, String
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -73,12 +74,11 @@ class Location(base):
         
 class PostRequestProcessingServicer(api_items_pb2_grpc.PostRequestProcessingServiceServicer):
     def create_location(self, request, context):
-        
+
         new_location = Location()
         new_location.person_id = request.person_id
+        new_location.coordinate = ST_Point(request.latitude, request.longitude)
         new_location.creation_time = request.creation_time
-        new_location.longitude = request.longitude
-        new_location.latitude = request.latitude
         db_string = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
         db = create_engine(db_string)
         Session = sessionmaker(bind=db)
@@ -92,11 +92,10 @@ class PostRequestProcessingServicer(api_items_pb2_grpc.PostRequestProcessingServ
             "latitude": request.latitude,
         }
         
-        print(location_request)
         return api_items_pb2.LocationMessage(**location_request)
 
     def create_person(self, request, context):
-        
+        print(request)
         new_person = Person()
         new_person.first_name = request.first_name
         new_person.last_name = request.last_name
