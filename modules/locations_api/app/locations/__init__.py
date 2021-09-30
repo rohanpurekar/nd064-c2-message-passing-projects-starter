@@ -3,6 +3,6 @@ from app.locations.schemas import ConnectionSchema, LocationSchema  # noqa
 
 
 def register_routes(api, app, root="api"):
-    from app.locations.controllers import api as udaconnect_api
+    from app.locations.controllers import api as locations_api
 
-    api.add_namespace(udaconnect_api, path=f"/{root}")
+    api.add_namespace(locations_api, path=f"/{root}")
