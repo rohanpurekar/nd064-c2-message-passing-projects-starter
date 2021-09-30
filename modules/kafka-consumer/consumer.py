@@ -10,24 +10,31 @@ logger = logging.getLogger("kafka-consumer")
 
 TOPIC_NAME = 'person_api'
 KAFKA_SERVER = 'my-release-kafka-0.my-release-kafka-headless.default.svc.cluster.local:9092'
-# location_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
+
 consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_SERVER], value_deserializer=lambda m: json.dumps(m.decode('utf-8')))
 
 
-# channel = grpc.insecure_channel("grpc-server.default.svc.cluster.local:5005")
-# stub = api_items_pb2_grpc.PostRequestProcessingServiceStub(channel)
+channel = grpc.insecure_channel("grpc-server.default.svc.cluster.local:5005")
+stub = api_items_pb2_grpc.PostRequestProcessingServiceStub(channel)
 
 for message in consumer:
     json_message=eval(json.loads((message.value)))
     
     if "person_id" in json_message:
-        logger.info(json_message["person_id"])
+        location = api_items_pb2.LocationMessage(
+            person_id=json_message["person_id"],
+            creation_time=json_message["creation_time"],
+            longitude=json_message["longitude"],
+            latitude=json_message["latitude"]
+        )
+        stub.create_location(location)
+    elif "first_name" in json_message:
+        person = api_items_pb2.LocationMessage(
+            first_name=json_message["first_name"],
+            last_name=json_message["last_name"],
+            company_name=json_message["company_name"]
+        )
+        stub.create_person(person)
     else:
-        logger.info(json_message.person_id)
-        # item = api_items_pb2.LocationMessage(
-        #     person_id=json_message.person
-        # )
-        #grpc 
-    # elif "first_name" in json_message:
-        #grpc
+        logger.info("What on earth have you sent my friend??")
     
