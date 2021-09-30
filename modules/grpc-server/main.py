@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 import time
 import grpc
@@ -7,7 +9,6 @@ from concurrent import futures
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import func
-from __future__ import annotations
 from datetime import datetime
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
