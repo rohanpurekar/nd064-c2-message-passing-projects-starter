@@ -1,0 +1,86 @@
+---
+openapi: 3.0.0
+info:
+  title: Connections API
+  version: 0.1.0-oas3
+servers:
+- url: /
+tags:
+- name: UdaConnect
+  description: Connections via geolocation.
+paths:
+  /api/persons/{person_id}/connection:
+    get:
+      tags:
+      - UdaConnect
+      summary: Get connections of persons
+      operationId: get_connection_data_resource
+      parameters:
+      - name: distance
+        in: query
+        description: Proximity to a given user in meters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: end_date
+        in: query
+        description: Upper bound of date range
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: start_date
+        in: query
+        description: Lower bound of date range
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetConnections'
+components:
+  schemas:
+    GetConnections:
+      required:
+      - distance
+      - end_date
+      - person_id
+      - start_date
+      type: string
+      properties:
+        person_id:
+          type: string
+          example: "6"
+        start_date:
+          type: string
+          example: 2020-01-01
+        end_date:
+          type: string
+          example: 2020-12-30
+        distance:
+          type: string
+          example: "5"
+      example: 'Example: /api/persons/5/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5'
+  responses:
+    ParseError:
+      description: When a mask can't be parsed
+    MaskError:
+      description: When any error occurs on mask

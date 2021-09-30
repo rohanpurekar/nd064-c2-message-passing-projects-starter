@@ -1,3 +1,17 @@
 REST APIs:
-I chose to use REST for all the outward facing APIs. This is because they are generally known and accepted. Moreover, with OpenAPI, the integration becomes easy because of the readily available documentation. 
+I chose to use REST for all the outward facing APIs. This is because they are generally known and accepted. Moreover, with OpenAPI, the integration becomes easy because of the readily available documentation. Moreover due the integration with Kafka, the REST API will be lightweight for POST requests and during GET requests they will be making direct calls to the DB. In an ideal/production scenario, I would choose to also use a Redis cluster before the DB to cache the contents after their first calls from the REST API.
+
+
+3 Microservices:
+I chose to divide the monolith into three microservices because they were doing three distinct operations that were not interdependent. So I created Locations, Persons and Connections microservices.
+
+Kafka Broker:
+I used the helm charts provided by the bitnami docs to deploy Kafka broker and zookeeper pods. It creates the pods and services. But for the sake of debugging, I also launched a kafka client. 
+The POST requests made to the rest APIs return a 202 response and push the message after validation into a kafka topic. This relieves the REST APIs of any additional burden to wait for the backend responses. In production, I would choose to use different queues for different APIs for the sake of scalability.
+
+Kafka Consumer and GRPC Writer:
+The Kafka consumer listens to the messages in topic and based on the type of the message it further pushes the message into gRPC. gRPC is highly scalable and validates data easily. Since, Flask is doing that in REST, the purpose of using gRPC was to have a scalable service to process the queue messages and push them to the gRPC server for saving the data into the DB.
+
+gRPC Server:
+The gRPC server has been selected due to its highly scalable nature. But, I also chose it for exposing APIs to the internal teams. Internal teams depending on the application don't have to use REST, they can use any programming language to push data. Furthermore, once gRPC receives the data, it is pushing the data into the database.
 

@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "d0b77eaa-c21a-4117-9871-6e1baef82f10",
+		"name": "Udaconnect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Get Location - Query String",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:30002/api/locations/31?localtion_id=31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30002",
+							"path": [
+								"api",
+								"locations",
+								"31"
+							],
+							"query": [
+								{
+									"key": "localtion_id",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location - Path",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:30002/api/locations/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30002",
+							"path": [
+								"api",
+								"locations",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Location",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"person_id\": 6,\n     \"creation_time\": \"2020-01-05T10:37:06\",\n     \"latitude\": \"-57.214283\",\n     \"longitude\": \"67.32963\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:30002/api/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30002",
+							"path": [
+								"api",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "GET Persons - Path",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:30003/api/persons/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30003",
+							"path": [
+								"api",
+								"persons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Persons - All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:30003/api/persons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30003",
+							"path": [
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Rohan\",\n    \"last_name\": \"Purekar\",\n    \"company_name\": \"Shoptimize Inc.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:30003/api/persons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30003",
+							"path": [
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Connections",
+			"item": [
+				{
+					"name": "GET Connections",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:30004/api/persons/1/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30004",
+							"path": [
+								"api",
+								"persons",
+								"1",
+								"connection"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "end_date",
+									"value": "2020-12-30"
+								},
+								{
+									"key": "distance",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

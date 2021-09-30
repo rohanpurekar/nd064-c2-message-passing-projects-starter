@@ -1,3 +1,37 @@
+# Installation
+
+## Prerequisites
+Ensure that you have all the mentioned technologies
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/) - API webserver
+* [SQLAlchemy](https://www.sqlalchemy.org/) - Database ORM
+* [PostgreSQL](https://www.postgresql.org/) - Relational database
+* [PostGIS](https://postgis.net/) - Spatial plug-in for PostgreSQL enabling geographic queries]
+* [Vagrant](https://www.vagrantup.com/) - Tool for managing virtual deployed environments
+* [VirtualBox](https://www.virtualbox.org/) - Hypervisor allowing you to run multiple operating systems
+* [K3s](https://k3s.io/) - Lightweight distribution of K8s to easily develop against a local cluster
+* [Helm](https://helm.sh/docs/intro/install/) - A package manager of Kubernetes Objects
+
+## Powering Up
+* Go to the main directory and perform the vagrant up and vagrant ssh as mentioned below
+* Setup kubectl as mentioned below
+
+## Steps
+1. `kubectl apply -f deployment/` - Set up the pods
+2. `sh scripts/run_db_command.sh <POD_NAME>` - Seed your database against the `postgres` pod. (`kubectl get pods` will give you the `POD_NAME`)
+3. `helm repo add bitnami https://charts.bitnami.com/bitnami` - Add the repo in helm
+4. `helm repo update` - Update the helm repo
+5. `helm install my-release bitnami/kafka` - Deploy the kafka broker and zookeeper
+
+## APIS
+1. Application: http://localhost:30000
+2. LocationAPI: http://localhost:30002
+2. PersonsAPI: http://localhost:30003
+2. ConnectionAPI: http://localhost:30004
+
+## Testing
+1. Import the docs/postman.json in your Postman APP
+2. Run the GET/POST Requests.
+
 # UdaConnect
 ## Overview
 ### Background
@@ -18,6 +52,7 @@ To do so, ***you will refactor this application into a microservice architecture
 * [Vagrant](https://www.vagrantup.com/) - Tool for managing virtual deployed environments
 * [VirtualBox](https://www.virtualbox.org/) - Hypervisor allowing you to run multiple operating systems
 * [K3s](https://k3s.io/) - Lightweight distribution of K8s to easily develop against a local cluster
+* [Helm](https://helm.sh/docs/intro/install/) - A package manager of Kubernetes Objects
 
 ## Running the app
 The project has been set up such that you should be able to have the project up and running with Kubernetes.

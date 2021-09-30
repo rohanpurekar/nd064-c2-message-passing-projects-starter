@@ -1,0 +1,89 @@
+---
+openapi: 3.0.0
+info:
+  title: UdaConnect Persons API
+  description: API for interacting with persons data
+  version: 0.1.0-oas3
+servers:
+- url: /
+tags:
+- name: persons_api
+  description: Connections via geolocation.
+paths:
+  /api/persons:
+    get:
+      tags:
+      - persons_api
+      summary: Get all persons
+      operationId: get_persons_resource
+      responses:
+        "200":
+          description: Get All Persons
+    post:
+      tags:
+      - persons_api
+      summary: Add new persons to the db
+      operationId: post_persons_resource
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddPerson'
+  /api/persons/{person_id}:
+    get:
+      tags:
+      - persons_api
+      summary: Get a particular person
+      operationId: get_person_resource
+      parameters:
+      - name: person_id
+        in: path
+        description: Unique ID for a given Person
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QueryPerson'
+components:
+  schemas:
+    AddPerson:
+      required:
+      - company_name
+      - first_name
+      - last_name
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: Rohan
+        last_name:
+          type: string
+          example: Purekar
+        company_name:
+          type: string
+          example: Shoptimize
+    QueryPerson:
+      required:
+      - id
+      type: string
+      properties:
+        id:
+          type: string
+          example: "6"
+      example: 'Example: /api/persons/6'
+  responses:
+    ParseError:
+      description: When a mask can't be parsed
+    MaskError:
+      description: When any error occurs on mask

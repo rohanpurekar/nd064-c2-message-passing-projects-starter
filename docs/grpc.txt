@@ -1,0 +1,9 @@
+The gRPC deployment object creates a service and a POD. 
+
+kubectl apply -f deployment/ : This will deploy all the pods and components. It creates a service for the grpc server. You can make a sample requests in two ways.
+1. Postman: Create a person and it will be visible after creation on http://localhost:30000/
+2. Create a gRPC Client and bootstrap the Endpoint and Port to send a sample message.
+
+Endpoint: udaconnect-grpc-server
+Port: 5005
+

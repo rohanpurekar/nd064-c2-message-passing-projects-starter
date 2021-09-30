@@ -1,0 +1,121 @@
+---
+openapi: 3.0.0
+info:
+  title: UdaConnect Locations API
+  version: 0.1.0-oas3
+servers:
+- url: /
+tags:
+- name: locations
+  description: Connections via geolocation.
+paths:
+  /api/locations:
+    get:
+      tags:
+      - locations
+      summary: Get a particular location using query string
+      operationId: get_location_resource_query
+      parameters:
+      - name: location_id
+        in: query
+        description: Unique ID for a given Location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+        "500":
+          description: Internal Error
+    post:
+      tags:
+      - locations
+      summary: Save a Location to the DB using query string
+      operationId: post_location_resource_query
+      parameters:
+      - name: location_id
+        in: query
+        description: Unique ID for a given Location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "202":
+          description: Success
+  /api/locations/{location_id}:
+    get:
+      tags:
+      - locations
+      summary: Get a particular location using path var
+      operationId: get_location_resource_path
+      parameters:
+      - name: location_id
+        in: path
+        description: Unique ID for a given Location
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+        "500":
+          description: Internal Error
+    post:
+      tags:
+      - locations
+      summary: Save a Location to the DB using raw json and path
+      operationId: post_location_resource_path
+      parameters:
+      - name: location_id
+        in: path
+        description: Unique ID for a given Location
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "202":
+          description: Success
+components:
+  schemas:
+    AddLocation:
+      required:
+      - creation_time
+      - latitude
+      - longitude
+      - person_id
+      type: object
+      properties:
+        person_id:
+          type: string
+          example: "6"
+        creation_time:
+          type: string
+          example: 2020-01-05T10:37:06
+        latitude:
+          type: string
+          example: "11.554232"
+        longitude:
+          type: string
+          example: "-11.232142"
+    QueryLocation:
+      required:
+      - id
+      type: string
+      properties:
+        id:
+          type: integer
+          example: 45
+      example: 'Example: /api/location/60'
+  responses:
+    ParseError:
+      description: When a mask can't be parsed
+    MaskError:
+      description: When any error occurs on mask
