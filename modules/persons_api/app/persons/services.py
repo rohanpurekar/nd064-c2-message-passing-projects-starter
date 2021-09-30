@@ -19,7 +19,7 @@ logger = logging.getLogger("udaconnect-api")
 class PersonService:
     @staticmethod
     def push_person_into_queue(person: Dict) -> Person:
-        validation_results: Dict = PersonSchema().validate(persons)
+        validation_results: Dict = PersonSchema().validate(person)
         if validation_results:
             logger.warning(f"Unexpected data format in payload: {validation_results}")
             raise Exception(f"Invalid payload: {validation_results}")
