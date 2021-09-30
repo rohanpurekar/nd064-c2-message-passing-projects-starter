@@ -34,7 +34,7 @@ class LocationService:
         if validation_results:
             logger.warning(f"Unexpected data format in payload: {validation_results}")
             raise Exception(f"Invalid payload: {validation_results}")
-        TOPIC_NAME = 'location_api'
+        TOPIC_NAME = 'person_api'
         KAFKA_SERVER = 'my-release-kafka-0.my-release-kafka-headless.default.svc.cluster.local:9092'
         location_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
         location_producer.send(TOPIC_NAME, bytes(str(location), 'utf-8'))
