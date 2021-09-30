@@ -95,7 +95,7 @@ class PostRequestProcessingServicer(api_items_pb2_grpc.PostRequestProcessingServ
         return api_items_pb2.LocationMessage(**location_request)
 
     def create_person(self, request, context):
-        print(request)
+
         new_person = Person()
         new_person.first_name = request.first_name
         new_person.last_name = request.last_name
@@ -107,14 +107,15 @@ class PostRequestProcessingServicer(api_items_pb2_grpc.PostRequestProcessingServ
         query = session.query(func.max(Person.id).label("largest_num"))
         new_person.id = (query.one().largest_num) + 1
         session.add(new_person)
+        session.commit()
         person_request = {
             "first_name": request.first_name,
             "last_name": request.last_name,
             "company_name": request.company_name,
         }
         
-        print(person_request)
-        return api_items_pb2.LocationMessage(**person_request)
+        
+        return api_items_pb2.PersonMessage(**person_request)
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 api_items_pb2_grpc.add_PostRequestProcessingServiceServicer_to_server(PostRequestProcessingServicer(), server)
