@@ -1,0 +1,3 @@
+REST APIs:
+I chose to use REST for all the outward facing APIs. This is because they are generally known and accepted. Moreover, with OpenAPI, the integration becomes easy because of the readily available documentation. 
+
